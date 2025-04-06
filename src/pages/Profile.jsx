@@ -41,7 +41,7 @@ export default function Profile() {
       setError('');
   
       try {
-        await axios.post('http://localhost:5000/api/energy-limits/limits', {
+        await axios.post(import.meta.env.VITE_API_URL+'/energy-limits/limits', {
           daily: parseFloat(limits.daily) || null,
           monthly: parseFloat(limits.monthly) || null
         });
@@ -68,7 +68,7 @@ export default function Profile() {
 
     try {
       console.log('Sending password change request with token:', user.token);
-      const response = await axios.post('http://localhost:5000/api/auth/change-password', 
+      const response = await axios.post(import.meta.env.VITE_API_URL+'/auth/change-password', 
         {
           currentPassword: formData.currentPassword,
           newPassword: formData.newPassword
@@ -107,7 +107,7 @@ export default function Profile() {
 
     const fetchUsageAndLimits = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/energy-limits/usage');
+        const response = await axios.get(import.meta.env.VITE_API_URL+'/energy-limits/usage');
         setUsage({
           dailyUsage: response.data.dailyUsage,
           monthlyUsage: response.data.monthlyUsage

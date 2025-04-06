@@ -17,7 +17,7 @@ const EnergyLimitSettings = () => {
 
   const fetchUsageAndLimits = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/energy-limits/usage');
+      const response = await axios.get(import.meta.env.VITE_API_URL+'/energy-limits/usage');
       setUsage({
         dailyUsage: response.data.dailyUsage,
         monthlyUsage: response.data.monthlyUsage
@@ -35,7 +35,7 @@ const EnergyLimitSettings = () => {
 
   const fetchNotifications = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/energy-limits/notifications');
+      const response = await axios.get(import.meta.env.VITE_API_URL+'/energy-limits/notifications');
       setNotifications(response.data);
     } catch (error) {
       console.error('Error fetching notifications:', error);
@@ -46,7 +46,7 @@ const EnergyLimitSettings = () => {
 
   const markNotificationsAsRead = async () => {
     try {
-      await axios.put('http://localhost:5000/api/energy-limits/notifications/read');
+      await axios.put(import.meta.env.VITE_API_URL+'/energy-limits/notifications/read');
       fetchNotifications();
     } catch (error) {
       console.error('Error marking notifications as read:', error);
